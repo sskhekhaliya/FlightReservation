@@ -1,0 +1,100 @@
+﻿@model IEnumerable<FlightReservation.Models.Booking>
+@{
+    ViewData["Title"] = "Orders";
+    ViewData["CSS"] = "/css/booking.css";
+    ViewData["CSS2"] = "/css/orders.css";
+}
+
+<h6>Your Upcomming Bookings:</h6>
+@if (Model != null)
+{
+if(Model.Count()>0)
+{
+foreach (var order in Model)
+{
+<div class="container ticket mb-3">
+    <div class="row">
+        <div class="col border-end">
+           
+                <div class="d-flex">
+                    <div class="d-flex w-100">
+                        <span class="material-symbols-outlined pe-2">
+                            flight_takeoff
+                        </span>
+                        <div>
+                            <h5 class=" p-0 m-0">@order.Schedule.From - @order.Schedule.To</h5>
+                            <p class="m-0 p-0 pt-2 b-gray font-weight-bolder small">@order.Schedule.BoardingTime.Date.ToString("ddd dd-MMM-yyyy")</p>
+                            <p class="m-0 p-0 pt-2 small">@(order.Class == "E" ? "ECONOMY" : "BUSSINESS")</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div>
+                            <img class="b-logo pe-2" src="@order.Schedule.FlightDetail.Logo" />
+                        </div>
+                        <div>
+                            <h6 class="m-0 p-0">@order.Schedule.FlightDetail.Name</h6>
+                            <p class="m-0 p-0">@order.Schedule.FlightNo</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm d-flex m-2 pt-5">
+                    <div class="col-sm text-center m-2">
+                        <h4 class="m-0 p-0 mb-1">@order.Schedule.BoardingTime.ToString("HH:mm")</h4>
+                        <h6 class="m-0 p-0">@order.Schedule.From</h6>
+                        <p class="m-0 p-0 small b-gray">@order.Schedule.BoardingTime.Date.ToString("ddd dd-MMM-yyyy")</p>
+                    </div>
+                    <div class="col small text-center m-2">
+                        <p class="b-gray p-0 m-0 pt-2">@(order.Schedule.DepartureTime.Subtract(order.Schedule.BoardingTime).Hours)h @(order.Schedule.DepartureTime.Subtract(order.Schedule.BoardingTime).Minutes)m</p>
+                        <hr class="b-hr m-0" />
+                    </div>
+                    <div class="col-sm text-center m-2">
+                        <h4 class="m-0 p-0 mb-1">@order.Schedule.DepartureTime.ToString("HH:mm")</h4>
+                        <h6 class="m-0 p-0">@order.Schedule.To</h6>
+                        <p class="m-0 p-0 small b-gray">@order.Schedule.DepartureTime.Date.ToString("ddd dd-MMM-yyyy")</p>
+                    </div>
+                </div>
+            
+        </div>
+        <div class="col">
+            <h5 class="p-0">Passanger Details</h5>
+            <hr class="mt-0"/>
+            <div class="row">
+                <div class="col">
+                    <h6 class="m-0 p-0">Booking ID:</h6>
+                    <p class="m-0 p-0">@order.BookingID</p>
+                    <h6 class="m-0 p-0">Name:</h6>
+                    <p class="m-0 p-0">@order.UserDetail.FirstName @order.UserDetail.LastName</p>
+                    <h6 class="m-0 p-0">Class:</h6>
+                    <p class="m-0 p-0">@(order.Class == "E" ? "Economy" : "Bussiness")</p>
+                    <h6 class="m-0 p-0">Boarding DateTime:</h6>
+                    <p class="m-0 p-0">@order.Schedule.BoardingTime.ToString("ddd dd/MM/yy hh:mm:tt")</p>
+                    <h6 class="m-0 p-0">Departure DateTime:</h6>
+                    <p class="m-0 p-0">@order.Schedule.DepartureTime.ToString("ddd dd/MM/yy hh:mm:tt")</p>
+
+                </div>
+                <div class="col position-relative">
+                    <h6 class="m-0 p-0">Phone No.:</h6>
+                    <p class="m-0 p-0">@order.UserDetail.PhoneNo</p>
+                    @if(order.UserDetail.Address != ""){
+                        <h6 class="m-0 p-0">Address:</h6>
+                        <p class="m-0 p-0">@order.UserDetail.Address</p>
+                    }
+                    <div style="position: absolute; bottom: 0; right: 15px;">
+                        <a asp-controller="User" asp-action="ETicket" asp-route-Id="@order.BookingID" class="btn btn-primary">Download Ticket</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+}
+                else
+                {
+                    <div class="text-center" style="position: absolute; position: absolute; left: 40%; bottom: 35%;">
+                        <h1 style="color:gray;">No Upcomming<br/>Booking</h1>
+                    </div>
+                }
+}
+

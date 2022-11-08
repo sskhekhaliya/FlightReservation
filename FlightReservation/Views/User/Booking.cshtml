@@ -1,0 +1,94 @@
+﻿@model FlightReservation.Models.Schedule
+@{
+    ViewData["Title"] = "Booking";
+    ViewData["CSS"] = "/css/booking.css";
+    string Class = ViewBag.Class;
+    string From = ViewBag.From;
+    string To = ViewBag.To;
+    int Seats = Class == "E" ? Model.ESeats : Model.BSeats;
+    int Price = Class == "E" ? Model.EPrice : Model.BPrice;
+    double tax = 0.18 * Price;
+    var Flight = Model.FlightDetail;
+    var FAirport = ViewBag.FAirport;
+    var TAirport = ViewBag.TAirport;
+
+}
+
+<div class="container p-0">
+    <div class="row ">
+        <div class="col-sm-8">
+            <div class="me-3 detail-col p-3">
+                <h4>Flight Details</h4>
+                <div class="m-3 border rounded p-2">
+                    <div class="d-flex">
+                        <div class="d-flex w-100">
+                            <span class="material-symbols-outlined pe-2">
+                                flight_takeoff
+                            </span>
+                            <div>
+                                <h5 class=" p-0 m-0">@From.Split(" - ")[1] - @To.Split(" - ")[1]</h5>
+                                <p class="m-0 p-0 pt-2 b-gray font-weight-bolder small">@Model.BoardingTime.Date.ToString("ddd dd-MMM-yyyy")</p>
+                                <p class="m-0 p-0 pt-2 small">@(Class == "E" ? "ECONOMY" : "BUSSINESS")</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div>
+                                <img class="b-logo pe-2" src="@Flight.Logo" />
+                            </div>
+                            <div>
+                                <h6 class="m-0 p-0">@Flight.Name</h6>
+                                <p class="m-0 p-0">@Model.FlightNo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm d-flex m-2 pt-5">
+                        <div class="col-sm text-center m-2">
+                            <h4 class="m-0 p-0 mb-1">@Model.BoardingTime.ToString("HH:mm")</h4>
+                            <h6 class="m-0 p-0">@From</h6>
+                            <p class="m-0 p-0 small b-gray">@Model.BoardingTime.Date.ToString("ddd dd-MMM-yyyy")</p>
+                        </div>
+                        <div class="col small text-center m-2">
+                            <p class="b-gray p-0 m-0 pt-2">@(Model.DepartureTime.Subtract(Model.BoardingTime).Hours)h @(Model.DepartureTime.Subtract(Model.BoardingTime).Minutes)m</p>
+                            <hr class="b-hr m-0" />
+                            <p class="b-gray p-0 m-0">Seats available: @Seats</p>
+                        </div>
+                        <div class="col-sm text-center m-2">
+                            <h4 class="m-0 p-0 mb-1">@Model.DepartureTime.ToString("HH:mm")</h4>
+                            <h6 class="m-0 p-0">@To</h6>
+                            <p class="m-0 p-0 small b-gray">@Model.DepartureTime.Date.ToString("ddd dd-MMM-yyyy")</p>
+                        </div>
+                    </div>
+                    <hr class="w-50 mx-auto my-4" />
+                    <ul style="list-style-type:disc!important;" class="ps-4 small">
+                        <li class="b-gray mb-2"><strong>Boarding Airport Name:</strong> @FAirport</li>
+                        <li class="b-gray"><strong>Departure Airport Name:</strong> @TAirport</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="price-col p-3">
+                <div class="row mb-4">
+                    <div class="col-8">Price Summary</div>
+                </div>
+                <div class="row mb-3 f-medium">
+                    <div class="col-8">Adult x 1</div>
+                    <div class="col-4 text-end"><strong>₹@(String.Format("{0:n}", Price))</strong></div>
+                </div>
+                <div class="row f-medium">
+                    <div class="col-8">Total taxes</div>
+                    <div class="col-4 text-end"><strong>₹@(String.Format("{0:n}", tax))</strong></div>
+                </div>
+                <hr />
+                <div class="row font-weight-bolder text-danger">
+                    <div class="col-8">Grand Total</div>
+                    <div class="col-4 text-end"><strong>₹@(String.Format("{0:n}", Price + tax))</strong></div>
+                </div>
+            </div>
+            <a class="btn btn-primary w-100 mt-3" asp-controller="Info" asp-action="Success" asp-route-SId="@Model.ScheduleID" asp-route-SClass="@Class">Book</a>
+
+        </div>
+        </div>
+</div>
+
+

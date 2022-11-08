@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "Low Blance";
+}
+
+<div class="text-center">
+    <img style="max-width: 400px;" src="https://static.vecteezy.com/system/resources/previews/003/337/480/non_2x/insufficient-balance-illustration-concept-free-vector.jpg" />
+    <h3>Oops, Insufficient Balance</h3>
+    <hr class="w-50 mx-auto" />
+    <p><strong>Current Balance: </strong>₹@ViewBag.Balance</p>
+    <a class="btn btn-primary" asp-controller="User" asp-action="Wallet">Add Balance</a>
+</div>
+

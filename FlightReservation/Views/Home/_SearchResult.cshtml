@@ -1,0 +1,75 @@
+﻿@model IEnumerable<FlightReservation.Models.Schedule>
+@{
+    string Date = ViewBag.Date == null ? DateTime.Now.Date.ToString("yyyy-MM-dd") : ViewBag.Date;
+    string Class = ViewBag.Class; 
+    string From = ViewBag.From;
+    string To = ViewBag.To;
+    string FAirport = ViewBag.FAirport;
+    string TAirport = ViewBag.TAirport;
+}
+
+
+@if (Model != null)
+{
+    <hr class="w-50 mx-auto my-5" />
+    if (Model.Count() > 0)
+    {
+        foreach (var result in Model)
+        {
+
+            <div class="container p-3 my-3 flight-list-con">
+                <div class="row align-items-center">
+                    <div class="col col-lg-2 d-flex m-2">
+                        <div>
+                            <img class="h-flight-logo" src="@result.FlightDetail.Logo" />
+                            <div>
+                                <h6 class="m-0 p-0">@result.FlightDetail.Name</h6>
+                                <p class="m-0 p-0">@result.FlightNo</p>
+                            </div>
+                        </div>
+                        <div style="margin-left: 25px;">
+                            <h3 class="d-inline p-0 m-0">@(Class == "E" ? result.ESeats : result.BSeats)</h3>
+                            <span class="small">Seats</span>
+                            <p class="p-0 m-0 position-relative" style="bottom: 5px">Available</p>
+                        </div>
+                    </div>
+                    <div class="col-sm d-flex m-2">
+                        <div class="col-sm text-center m-2">
+                            <h4 class="m-0 p-0 mb-1">@result.BoardingTime.ToString("HH:mm")</h4>
+                            <h6 class="m-0 p-0">@From</h6>
+                            <p class="m-0 p-0 small h-grey">@result.BoardingTime.Date.ToString("ddd dd-MMM-yyyy")</p>
+                        </div>
+                        <div class="col small text-center m-2">
+                            <p class="h-grey p-0 m-0 pt-2">@(result.DepartureTime.Subtract(result.BoardingTime).Hours)h @(@result.DepartureTime.Subtract(result.BoardingTime).Minutes)m</p>
+                            <hr class="h-hr m-0" />
+                            <p class="h-grey" p-0 manifest=-0>
+                                @(Class == "E" ? "Economy" : "Bussiness")
+                            </p>
+                        </div>
+                        <div class="col-sm text-center m-2">
+                            <h4 class="m-0 p-0 mb-1">@result.DepartureTime.ToString("HH:mm")</h4>
+                            <h6 class="m-0 p-0">@To</h6>
+                            <p class="m-0 p-0 small h-grey">@result.DepartureTime.Date.ToString("ddd dd-MMM-yyyy")</p>
+                        </div>
+                    </div>
+                    <div class="col col-lg-2 text-center m-2">
+                        <p class="text-danger font-weight-bold" style="font-size: x-large;">₹@String.Format("{0:n0}", Class == "E" ? result.EPrice : result.BPrice)</p>
+                        <a class="btn btn-primary hr-btn" asp-controller="User" asp-action="Booking" asp-route-Id="@result.ScheduleID" asp-route-Class="@Class" asp-route-From="@From" asp-route-To="@To" asp-route-FAirport="@FAirport" asp-route-TAirport="@TAirport">Book</a>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    }
+                else
+                {
+<div class="text-center">
+    <img style="max-width:85px;" src="https://www.freeiconspng.com/thumbs/travel-icon/travel-icon--be-found-online-9.png" />
+    <h3>No Flight</h3>
+    <p>Sorry for convenience</p>
+</div>
+                }
+
+
+}

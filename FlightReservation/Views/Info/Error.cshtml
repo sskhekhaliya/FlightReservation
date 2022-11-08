@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "Error";
+    string error = String.IsNullOrEmpty(@ViewBag.Error) ? "There is something wrong" : @ViewBag.Error;
+}
+
+<div class="text-center">
+    <h1 >@error</h1>
+    <p>Sorry for your Convenience</p>
+    <a class="btn btn-primary" asp-controller="User" asp-action="Wallet">Add Balance</a>
+</div>
+
+

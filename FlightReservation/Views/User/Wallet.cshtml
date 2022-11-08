@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Wallet";
+}
+
+<div class="container text-center">
+    <div class="m-5 mx-auto p-5 pt-3" style="box-shadow: rgb(0 0 0 / 24%) 0 0 8px; max-width: 500px; border-radius: 25px; ">
+        <h6>Available Balanace</h6>
+        <h1 class="my-4 mt-2">₹@ViewBag.Balance</h1>
+        <hr />
+        <form asp-controller="User" asp-action="AddBalance" method="post">
+            <p><strong>Add Balance</strong></p>
+            <input class="form-control mb-3" type="number" name="money" />
+            <p class="text-danger">@ViewBag.Error</p>
+            <button class="btn btn-primary w-100" type="submit">Add</button>
+        </form>
+    </div>
+</div>
+@if (ViewBag.Status == "success"){
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> Ammount has been successfully added.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
+
+
+

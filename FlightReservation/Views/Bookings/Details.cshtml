@@ -1,0 +1,143 @@
+﻿@model FlightReservation.Models.Booking
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Booking Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BookingID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookingID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateAndTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateAndTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDetail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDetail.UserID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.ScheduleID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <h4>Flight Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule.FlightNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.FlightNo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule.FlightDetail.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.FlightDetail.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Class)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Class)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule.From)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.From)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule.To)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.To)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule.BoardingTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.BoardingTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule.DepartureTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.DepartureTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <h4>Flight Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDetail.UserID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDetail.UserID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDetail.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDetail.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDetail.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDetail.EmailID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDetail.EmailID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDetail.Gender)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDetail.Gender)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDetail.DOB)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDetail.DOB)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDetail.PhoneNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDetail.PhoneNo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDetail.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDetail.Address)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

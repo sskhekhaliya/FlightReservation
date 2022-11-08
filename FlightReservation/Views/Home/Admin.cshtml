@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "Admin";
+    ViewData["CSS"] = "/css/admin.css";
+}
+
+<div id="gallery">
+        <h1 class="mb-4" style="background:none">Hi, Admin</h1>
+        <h5>Dashboard</h5>
+        <div id="images">
+            
+            <a asp-controller="FlightDetails" asp-action="Index">
+                <div class="d-inline">
+                    <div class="figure">
+                        <img class="image" src="https://media.cntraveler.com/photos/62a8fac9f05dcc0e79276918/16:9/w_2560%2Cc_limit/flight%2520attendant_GettyImages-1152520537.jpg" />
+                        <div class="caption">
+                            <div class="body">
+                                <div class="number">01</div>
+                                <hr />
+                                <h1 class="title"><b>Flight</b></h1>
+                                <p class="text">Add, edit, and see details of the flights.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </a>
+                
+            <a asp-controller="Schedules" asp-action="Index">
+                <div class="figure">
+                    <img class="image" src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/001/270/387/datas/original.jpg" />
+                    <div class="caption">
+                        <div class="body">
+                            <div class="number">02</div>
+                            <hr />
+                            <h1 class="title"><b>Schedule</b></h1>
+                            <p class="text">Schedule a flight, modify and see the details of flight schedule.</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a asp-controller="Bookings" asp-action="Index">
+                <div class="figure">
+                    <img class="image" src="https://sloanreview.mit.edu/wp-content/uploads/2020/03/GEN-Business-Management-Teams-Teamwork-1290x860-1.jpg" />
+                    <div class="caption">
+                        <div class="body">
+                            <div class="number">03</div>
+                            <hr />
+                            <h1 class="title"><b>Bookings</b></h1>
+                            <p class="text">Manage all Bookings.</p>
+                        </div>
+                    </div>
+                </div>
+                </a>
+        </div>
+</div>

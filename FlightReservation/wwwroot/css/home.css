@@ -1,0 +1,75 @@
+﻿
+.home-img {
+    background-image: url(https://media.flughafen-zuerich.ch/-/jssmedia/airport/portal/bilder/illustrationen/passagiere/hero/illustration-abflug.svg?vs=1&rev=6747767b58bf4daba80cc056d97b3d83);
+    min-height: 215px;
+    background-repeat-x: no-repeat;
+    background-position-x: center;
+    background-attachment: fixed;
+}
+
+.home-form {
+    color: gray;
+    font-weight: bold;
+}
+
+sb-head {
+    font-weight: 500;
+    font-size: large;
+    letter-spacing: 2px;
+    position: relative;
+    top: 8px;
+    left: 6px;
+}
+
+.form-con {
+    padding: 14px;
+    border-radius: 9px;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+
+.search-inp {
+    font-size: x-large;
+    width: 100%;
+    padding: 12px 12px 5px 12px;
+    border: 0;
+    border-bottom: 1px solid lightgray;
+}
+
+.search-inp:focus{
+    outline: none;
+}
+
+.search-btn {
+    border-radius: 30px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 0px;
+    margin: 10px 0 0 0;
+}
+
+
+datalist {
+    position: absolute;
+    max-height: 15em;
+    border: 0 none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute !important;
+    z-index: 100;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+    datalist option {
+        font-size: 1em;
+        padding: 0.3em 1em;
+        background-color: #fff;
+        cursor: pointer;
+    }
+
+        /* option active styles */
+        datalist option:hover, datalist option:focus {
+            color: #fff;
+            background-color: #036;
+            outline: 0 none;
+        }

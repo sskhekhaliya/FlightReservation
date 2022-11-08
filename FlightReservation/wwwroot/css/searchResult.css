@@ -1,0 +1,22 @@
+﻿.flight-list-con {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 8px;
+}
+
+.h-flight-logo{
+    max-width: 50px;
+}
+
+.h-hr {
+    border-top: 2px dotted;
+    background: transparent;
+}
+
+.h-grey{
+    color: gray;
+}
+
+.hr-btn {
+    width: -webkit-fill-available;
+    border-radius: 30px;
+}

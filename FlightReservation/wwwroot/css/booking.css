@@ -1,0 +1,29 @@
+﻿body {
+    background-color: #eee;
+}
+
+.detail-col, .price-col {
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
+}
+.material-symbols-outlined{
+    font-size: xx-large;
+}
+
+.b-logo{
+    max-width: 50px;
+}
+
+.b-hr {
+    border-top: 2px dotted;
+    background: transparent;
+}
+
+.b-gray{
+    color: gray;
+}
+
+.f-medium{
+    font-size: medium;
+}
