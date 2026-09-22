@@ -1,56 +1,76 @@
-﻿
 @{
-    ViewData["Title"] = "Admin";
-    ViewData["CSS"] = "/css/admin.css";
+    ViewData["Title"] = "Admin Dashboard";
 }
 
-<div id="gallery">
-        <h1 class="mb-4" style="background:none">Hi, Admin</h1>
-        <h5>Dashboard</h5>
-        <div id="images">
-            
-            <a asp-controller="FlightDetails" asp-action="Index">
-                <div class="d-inline">
-                    <div class="figure">
-                        <img class="image" src="https://media.cntraveler.com/photos/62a8fac9f05dcc0e79276918/16:9/w_2560%2Cc_limit/flight%2520attendant_GettyImages-1152520537.jpg" />
-                        <div class="caption">
-                            <div class="body">
-                                <div class="number">01</div>
-                                <hr />
-                                <h1 class="title"><b>Flight</b></h1>
-                                <p class="text">Add, edit, and see details of the flights.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </a>
-                
-            <a asp-controller="Schedules" asp-action="Index">
-                <div class="figure">
-                    <img class="image" src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/001/270/387/datas/original.jpg" />
-                    <div class="caption">
-                        <div class="body">
-                            <div class="number">02</div>
-                            <hr />
-                            <h1 class="title"><b>Schedule</b></h1>
-                            <p class="text">Schedule a flight, modify and see the details of flight schedule.</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a asp-controller="Bookings" asp-action="Index">
-                <div class="figure">
-                    <img class="image" src="https://sloanreview.mit.edu/wp-content/uploads/2020/03/GEN-Business-Management-Teams-Teamwork-1290x860-1.jpg" />
-                    <div class="caption">
-                        <div class="body">
-                            <div class="number">03</div>
-                            <hr />
-                            <h1 class="title"><b>Bookings</b></h1>
-                            <p class="text">Manage all Bookings.</p>
-                        </div>
-                    </div>
-                </div>
-                </a>
+<div class="container mt-4 mb-5">
+    <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+        <div>
+            <h1 class="fw-bold mb-1"><span class="material-symbols-outlined align-middle" style="font-size: 2.5rem; color: #1b6ec2;">admin_panel_settings</span> Hi, Admin</h1>
+            <h5 class="text-muted">Welcome to your dashboard</h5>
         </div>
+        <div class="d-none d-md-block text-end">
+            <h5 class="text-muted mb-0"><span class="material-symbols-outlined align-middle">today</span> @DateTime.Now.ToString("dddd, MMMM dd")</h5>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-2">
+        <!-- Flights Card -->
+        <div class="col-md-4">
+            <a asp-controller="FlightDetails" asp-action="Index" class="text-decoration-none">
+                <div class="card shadow-sm h-100 border-0 hover-card">
+                    <img src="https://media.cntraveler.com/photos/62a8fac9f05dcc0e79276918/16:9/w_2560%2Cc_limit/flight%2520attendant_GettyImages-1152520537.jpg" class="card-img-top rounded-top" alt="Flights" style="height: 200px; object-fit: cover;">
+                    <div class="card-body text-center px-4 pb-4">
+                        <div class="rounded-circle bg-primary text-white d-inline-flex justify-content-center align-items-center mb-3 shadow" style="width: 70px; height: 70px; margin-top: -60px; border: 4px solid white; position: relative;">
+                            <span class="material-symbols-outlined" style="font-size: 35px;">flight</span>
+                        </div>
+                        <h4 class="card-title fw-bold text-dark mb-3">Manage Flights</h4>
+                        <p class="card-text text-muted">Add new airline details, edit existing flights, and manage airline logos.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Schedules Card -->
+        <div class="col-md-4">
+            <a asp-controller="Schedules" asp-action="Index" class="text-decoration-none">
+                <div class="card shadow-sm h-100 border-0 hover-card">
+                    <img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/001/270/387/datas/original.jpg" class="card-img-top rounded-top" alt="Schedules" style="height: 200px; object-fit: cover;">
+                    <div class="card-body text-center px-4 pb-4">
+                        <div class="rounded-circle bg-success text-white d-inline-flex justify-content-center align-items-center mb-3 shadow" style="width: 70px; height: 70px; margin-top: -60px; border: 4px solid white; position: relative;">
+                            <span class="material-symbols-outlined" style="font-size: 35px;">calendar_month</span>
+                        </div>
+                        <h4 class="card-title fw-bold text-dark mb-3">Flight Schedules</h4>
+                        <p class="card-text text-muted">Schedule flights on routes, set departure times, and manage ticket pricing.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Bookings Card -->
+        <div class="col-md-4">
+            <a asp-controller="Bookings" asp-action="Index" class="text-decoration-none">
+                <div class="card shadow-sm h-100 border-0 hover-card">
+                    <img src="https://sloanreview.mit.edu/wp-content/uploads/2020/03/GEN-Business-Management-Teams-Teamwork-1290x860-1.jpg" class="card-img-top rounded-top" alt="Bookings" style="height: 200px; object-fit: cover;">
+                    <div class="card-body text-center px-4 pb-4">
+                        <div class="rounded-circle bg-info text-white d-inline-flex justify-content-center align-items-center mb-3 shadow" style="width: 70px; height: 70px; margin-top: -60px; border: 4px solid white; position: relative;">
+                            <span class="material-symbols-outlined" style="font-size: 35px;">book_online</span>
+                        </div>
+                        <h4 class="card-title fw-bold text-dark mb-3">All Bookings</h4>
+                        <p class="card-text text-muted">View all passenger reservations and monitor booking statistics.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
+
+<style>
+    .hover-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hover-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+    }
+</style>
+

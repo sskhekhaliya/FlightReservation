@@ -1,4 +1,4 @@
-﻿using FlightReservation.Data;
+using FlightReservation.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -45,7 +45,7 @@ namespace FlightReservation.Controllers
 
                     var result = context.Schedules
                         .Include(e => e.FlightDetail)
-                        .Where(e => e.DepartureTime.Date == DateTime.Parse(Date).Date && e.From == boarding && e.To == departure);
+                        .Where(e => e.DepartureTime.Date == DateTime.Parse(Date).Date && (e.From == boarding || e.From == From || e.From.StartsWith(boarding)) && (e.To == departure || e.To == To || e.To.StartsWith(departure)));
 
                     return View(result);
                 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using FlightReservation.Data;
 using FlightReservation.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace FlightReservation.Controllers
 {
@@ -15,10 +17,12 @@ namespace FlightReservation.Controllers
     public class FlightDetailsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public FlightDetailsController(ApplicationDbContext context)
+        public FlightDetailsController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            _hostEnvironment = hostEnvironment;
         }
 
         // GET: FlightDetails
@@ -52,14 +56,31 @@ namespace FlightReservation.Controllers
         }
 
         // POST: FlightDetails/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FlightID,Name,Logo")] FlightDetail flightDetail)
+        public async Task<IActionResult> Create([Bind("FlightID,Name,Logo,LogoFile")] FlightDetail flightDetail)
         {
             if (ModelState.IsValid)
             {
+                if (flightDetail.LogoFile != null)
+                {
+                    string wwwRootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(flightDetail.LogoFile.FileName);
+                    string extension = Path.GetExtension(flightDetail.LogoFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    
+                    string imagesDir = Path.Combine(wwwRootPath, "images");
+                    if (!Directory.Exists(imagesDir))
+                        Directory.CreateDirectory(imagesDir);
+
+                    string path = Path.Combine(imagesDir, fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await flightDetail.LogoFile.CopyToAsync(fileStream);
+                    }
+                    flightDetail.Logo = "/images/" + fileName;
+                }
+
                 _context.Add(flightDetail);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -84,11 +105,9 @@ namespace FlightReservation.Controllers
         }
 
         // POST: FlightDetails/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("FlightID,Name,Logo")] FlightDetail flightDetail)
+        public async Task<IActionResult> Edit(string id, [Bind("FlightID,Name,Logo,LogoFile")] FlightDetail flightDetail)
         {
             if (id != flightDetail.FlightID)
             {
@@ -99,6 +118,25 @@ namespace FlightReservation.Controllers
             {
                 try
                 {
+                    if (flightDetail.LogoFile != null)
+                    {
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string fileName = Path.GetFileNameWithoutExtension(flightDetail.LogoFile.FileName);
+                        string extension = Path.GetExtension(flightDetail.LogoFile.FileName);
+                        fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        
+                        string imagesDir = Path.Combine(wwwRootPath, "images");
+                        if (!Directory.Exists(imagesDir))
+                            Directory.CreateDirectory(imagesDir);
+
+                        string path = Path.Combine(imagesDir, fileName);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await flightDetail.LogoFile.CopyToAsync(fileStream);
+                        }
+                        flightDetail.Logo = "/images/" + fileName;
+                    }
+
                     _context.Update(flightDetail);
                     await _context.SaveChangesAsync();
                 }
@@ -153,3 +191,4 @@ namespace FlightReservation.Controllers
         }
     }
 }
+

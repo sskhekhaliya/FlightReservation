@@ -1,51 +1,47 @@
-﻿@model IEnumerable<FlightReservation.Models.Booking>
+@model IEnumerable<FlightReservation.Models.Booking>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All Bookings";
 }
 
-<h1>Bookings</h1>
+<div class="card shadow-sm border-0 mt-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+        <h4 class="mb-0 text-info fw-bold"><span class="material-symbols-outlined align-middle">book_online</span> All Bookings</h4>
+        <a asp-action="Create" class="btn btn-info text-white"><span class="material-symbols-outlined align-middle" style="font-size:18px;">add</span> Create New</a>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">Booking Date</th>
+                        <th>User ID</th>
+                        <th>Class</th>
+                        <th>Flight No</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (var item in Model) {
+                    <tr>
+                        <td class="ps-4 align-middle">@Html.DisplayFor(modelItem => item.DateAndTime)</td>
+                        <td class="align-middle text-muted">@Html.DisplayFor(modelItem => item.UserDetail.UserID)</td>
+                        <td class="align-middle">
+                            @if(item.Class == "E") {
+                                <span class="badge bg-info text-dark">Economy</span>
+                            } else {
+                                <span class="badge bg-warning text-dark">Business</span>
+                            }
+                        </td>
+                        <td class="align-middle fw-bold text-primary">@Html.DisplayFor(modelItem => item.Schedule.FlightNo)</td>
+                        <td class="text-end pe-4 align-middle">
+                            <a asp-action="Details" asp-route-id="@item.BookingID" class="btn btn-sm btn-outline-secondary"><span class="material-symbols-outlined align-middle" style="font-size:16px;">visibility</span> Details</a>
+                        </td>
+                    </tr>
+            }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DateAndTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserDetail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Class)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Schedule)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateAndTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserDetail.UserID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Class)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Schedule.FlightNo)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.BookingID">Details</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

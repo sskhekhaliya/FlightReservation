@@ -1,72 +1,54 @@
-﻿@model FlightReservation.Models.Schedule
+@model FlightReservation.Models.Schedule
 
-@{
-    ViewData["Title"] = "Details";
-}
+@{ ViewData["Title"] = "Schedule Details"; }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Schedule</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FlightDetail)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FlightDetail.FlightID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.From)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.From)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BoardingTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BoardingTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.To)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.To)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DepartureTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DepartureTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ESeats)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ESeats)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BSeats)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BSeats)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BPrice)
-        </dd>
-    </dl>
+<div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0"><span class="material-symbols-outlined align-middle">visibility</span> Schedule Details</h4>
+            </div>
+            <div class="card-body p-4">
+                <div class="row mb-4 text-center border-bottom pb-3">
+                    <div class="col">
+                        <h5 class="text-muted mb-1">Origin</h5>
+                        <h4 class="fw-bold text-primary">@(Model.From?.Split('-').FirstOrDefault()?.Trim())</h4>
+                        <small>@Model.BoardingTime</small>
+                    </div>
+                    <div class="col-2 d-flex align-items-center justify-content-center">
+                        <span class="material-symbols-outlined text-muted" style="font-size: 2rem;">flight_takeoff</span>
+                    </div>
+                    <div class="col">
+                        <h5 class="text-muted mb-1">Destination</h5>
+                        <h4 class="fw-bold text-success">@(Model.To?.Split('-').FirstOrDefault()?.Trim())</h4>
+                        <small>@Model.DepartureTime</small>
+                    </div>
+                </div>
+                <div class="row text-center mb-3">
+                    <h5 class="fw-bold mb-3">Flight: @Model.FlightDetail.FlightID</h5>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="p-3 bg-light rounded border text-center">
+                            <h5 class="text-primary border-bottom pb-2">Economy Class</h5>
+                            <p class="mb-1"><strong>Seats:</strong> @Model.ESeats</p>
+                            <h4 class="text-success fw-bold">₹@Model.EPrice</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 bg-light rounded border text-center">
+                            <h5 class="text-primary border-bottom pb-2">Business Class</h5>
+                            <p class="mb-1"><strong>Seats:</strong> @Model.BSeats</p>
+                            <h4 class="text-success fw-bold">₹@Model.BPrice</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-outline-secondary"><span class="material-symbols-outlined align-middle" style="font-size:18px;">arrow_back</span> Back</a>
+                <a asp-action="Edit" asp-route-id="@Model.ScheduleID" class="btn btn-success"><span class="material-symbols-outlined align-middle" style="font-size:18px;">edit</span> Edit</a>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ScheduleID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

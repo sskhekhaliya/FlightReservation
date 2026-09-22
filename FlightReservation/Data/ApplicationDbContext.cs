@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +12,7 @@ namespace FlightReservation.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=Dotnet; Database=FlightReservation;User ID=sa;Password=wipro@123");
+            optionsBuilder.UseSqlServer(@"Server=localhost;Database=FlightReservation;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
         public DbSet<UserDetail> UserDetails { get; set; }

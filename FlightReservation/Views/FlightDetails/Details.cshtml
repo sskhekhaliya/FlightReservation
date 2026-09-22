@@ -1,30 +1,25 @@
-﻿@model FlightReservation.Models.FlightDetail
+@model FlightReservation.Models.FlightDetail
 
-@{
-    ViewData["Title"] = "Details";
-}
+@{ ViewData["Title"] = "Flight Details"; }
 
-<h1>Details</h1>
-
-<div>
-    <h4>FlightDetail</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Logo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Logo)
-        </dd>
-    </dl>
+<div class="row mt-4">
+    <div class="col-md-6 offset-md-3">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><span class="material-symbols-outlined align-middle">visibility</span> Flight Details</h4>
+            </div>
+            <div class="card-body p-4 text-center">
+                @if (!string.IsNullOrEmpty(Model.Logo)) {
+                    <img src="@Model.Logo" class="img-fluid mb-3 rounded" style="max-height: 100px; object-fit: contain;" alt="Logo" onerror="this.style.display='none'" />
+                }
+                <h3 class="fw-bold">@Model.Name</h3>
+                <h5 class="text-muted">Flight ID: @Model.FlightID</h5>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-outline-secondary"><span class="material-symbols-outlined align-middle" style="font-size:18px;">arrow_back</span> Back</a>
+                <a asp-action="Edit" asp-route-id="@Model.FlightID" class="btn btn-primary"><span class="material-symbols-outlined align-middle" style="font-size:18px;">edit</span> Edit</a>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.FlightID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

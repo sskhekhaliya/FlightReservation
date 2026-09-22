@@ -1,83 +1,60 @@
-﻿@model IEnumerable<FlightReservation.Models.Schedule>
+@model IEnumerable<FlightReservation.Models.Schedule>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Flight Schedules";
 }
 
-<h1>Schedule of flights</h1>
+<div class="card shadow-sm border-0 mt-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+        <h4 class="mb-0 text-success fw-bold"><span class="material-symbols-outlined align-middle">calendar_month</span> Flight Schedules</h4>
+        <a asp-action="Create" class="btn btn-success"><span class="material-symbols-outlined align-middle" style="font-size:18px;">add</span> Schedule New</a>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">Flight</th>
+                        <th>Route</th>
+                        <th>Boarding & Departure</th>
+                        <th>Eco. (Seats/Price)</th>
+                        <th>Bus. (Seats/Price)</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (var item in Model) {
+                    <tr>
+                        <td class="ps-4 align-middle fw-bold">@Html.DisplayFor(modelItem => item.FlightDetail.FlightID)</td>
+                        <td class="align-middle">
+                            <div class="text-primary fw-bold">@(item.From?.Split('-').FirstOrDefault()?.Trim())</div>
+                            <span class="material-symbols-outlined text-muted" style="font-size:16px;">arrow_downward</span><br/>
+                            <div class="text-success fw-bold">@(item.To?.Split('-').FirstOrDefault()?.Trim())</div>
+                        </td>
+                        <td class="align-middle">
+                            <small class="d-block"><strong class="text-muted">B:</strong> @Html.DisplayFor(modelItem => item.BoardingTime)</small>
+                            <small class="d-block"><strong class="text-muted">D:</strong> @Html.DisplayFor(modelItem => item.DepartureTime)</small>
+                        </td>
+                        <td class="align-middle">
+                            <span class="badge bg-secondary mb-1">@Html.DisplayFor(modelItem => item.ESeats) Seats</span><br/>
+                            <span class="text-success fw-bold">₹@Html.DisplayFor(modelItem => item.EPrice)</span>
+                        </td>
+                        <td class="align-middle">
+                            <span class="badge bg-secondary mb-1">@Html.DisplayFor(modelItem => item.BSeats) Seats</span><br/>
+                            <span class="text-success fw-bold">₹@Html.DisplayFor(modelItem => item.BPrice)</span>
+                        </td>
+                        <td class="text-end pe-4 align-middle">
+                            <div class="btn-group" role="group">
+                                <a asp-action="Edit" asp-route-id="@item.ScheduleID" class="btn btn-sm btn-outline-primary"><span class="material-symbols-outlined align-middle" style="font-size:16px;">edit</span></a>
+                                <a asp-action="Details" asp-route-id="@item.ScheduleID" class="btn btn-sm btn-outline-secondary"><span class="material-symbols-outlined align-middle" style="font-size:16px;">visibility</span></a>
+                                <a asp-action="Delete" asp-route-id="@item.ScheduleID" class="btn btn-sm btn-outline-danger"><span class="material-symbols-outlined align-middle" style="font-size:16px;">delete</span></a>
+                            </div>
+                        </td>
+                    </tr>
+            }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Schedule New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FlightDetail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.From)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BoardingTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.To)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartureTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ESeats)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BSeats)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BPrice)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FlightDetail.FlightID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.From)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BoardingTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.To)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartureTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ESeats)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BSeats)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BPrice)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ScheduleID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ScheduleID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ScheduleID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

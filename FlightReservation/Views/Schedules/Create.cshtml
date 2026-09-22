@@ -1,69 +1,156 @@
-﻿@model FlightReservation.Models.Schedule
+@model FlightReservation.Models.Schedule
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Schedule a Flight";
 }
 
-<h1>Create</h1>
+<div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0"><span class="material-symbols-outlined" style="vertical-align: middle;">calendar_month</span> Schedule a Flight</h4>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3" role="alert"></div>
 
-<h4>Schedule</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FlightNo" class="control-label"></label>
-                <select asp-for="FlightNo" class ="form-control" asp-items="ViewBag.FlightNo"></select>
+                    <div class="form-group mb-4">
+                        <label asp-for="FlightNo" class="control-label fw-bold"></label>
+                        <select asp-for="FlightNo" class="form-control select2-search" asp-items="ViewBag.FlightNo">
+                            <option value="">-- Select Flight --</option>
+                        </select>
+                        <span asp-validation-for="FlightNo" class="text-danger"></span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="From" class="control-label fw-bold"></label>
+                                <select asp-for="From" class="form-control select2-search">
+                                    <option value="">-- Select Origin --</option>
+                                    <option value="DEL - New Delhi">DEL - New Delhi</option>
+                                    <option value="BOM - Mumbai">BOM - Mumbai</option>
+                                    <option value="BLR - Bengaluru">BLR - Bengaluru</option>
+                                    <option value="HYD - Hyderabad">HYD - Hyderabad</option>
+                                    <option value="CCU - Kolkata">CCU - Kolkata</option>
+                                    <option value="MAA - Chennai">MAA - Chennai</option>
+                                    <option value="AMD - Ahmedabad">AMD - Ahmedabad</option>
+                                    <option value="GOI - Goa">GOI - Goa</option>
+                                    <option value="COK - Kochi">COK - Kochi</option>
+                                    <option value="PNQ - Pune">PNQ - Pune</option>
+                                </select>
+                                <span asp-validation-for="From" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="To" class="control-label fw-bold"></label>
+                                <select asp-for="To" class="form-control select2-search">
+                                    <option value="">-- Select Destination --</option>
+                                    <option value="DEL - New Delhi">DEL - New Delhi</option>
+                                    <option value="BOM - Mumbai">BOM - Mumbai</option>
+                                    <option value="BLR - Bengaluru">BLR - Bengaluru</option>
+                                    <option value="HYD - Hyderabad">HYD - Hyderabad</option>
+                                    <option value="CCU - Kolkata">CCU - Kolkata</option>
+                                    <option value="MAA - Chennai">MAA - Chennai</option>
+                                    <option value="AMD - Ahmedabad">AMD - Ahmedabad</option>
+                                    <option value="GOI - Goa">GOI - Goa</option>
+                                    <option value="COK - Kochi">COK - Kochi</option>
+                                    <option value="PNQ - Pune">PNQ - Pune</option>
+                                </select>
+                                <span asp-validation-for="To" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="BoardingTime" class="control-label fw-bold"></label>
+                                <input asp-for="BoardingTime" class="form-control" />
+                                <span asp-validation-for="BoardingTime" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="DepartureTime" class="control-label fw-bold"></label>
+                                <input asp-for="DepartureTime" class="form-control" />
+                                <span asp-validation-for="DepartureTime" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 mb-4 bg-light rounded border">
+                        <h5 class="border-bottom pb-2 mb-3 text-primary"><span class="material-symbols-outlined" style="vertical-align: middle;">airline_seat_recline_normal</span> Economy Class</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="ESeats" class="control-label fw-bold">Total Seats</label>
+                                    <input asp-for="ESeats" class="form-control" value="20"/>
+                                    <span asp-validation-for="ESeats" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="EPrice" class="control-label fw-bold">Ticket Price</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input asp-for="EPrice" class="form-control" />
+                                    </div>
+                                    <span asp-validation-for="EPrice" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 mb-4 bg-light rounded border">
+                        <h5 class="border-bottom pb-2 mb-3 text-primary"><span class="material-symbols-outlined" style="vertical-align: middle;">airline_seat_recline_extra</span> Business Class</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="BSeats" class="control-label fw-bold">Total Seats</label>
+                                    <input asp-for="BSeats" class="form-control" value="8"/>
+                                    <span asp-validation-for="BSeats" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="BPrice" class="control-label fw-bold">Ticket Price</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input asp-for="BPrice" class="form-control" />
+                                    </div>
+                                    <span asp-validation-for="BPrice" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">Publish Schedule</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="From" class="control-label"></label>
-                <input asp-for="From" class="form-control" />
-                <span asp-validation-for="From" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BoardingTime" class="control-label"></label>
-                <input asp-for="BoardingTime" class="form-control" />
-                <span asp-validation-for="BoardingTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="To" class="control-label"></label>
-                <input asp-for="To" class="form-control" />
-                <span asp-validation-for="To" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DepartureTime" class="control-label"></label>
-                <input asp-for="DepartureTime" class="form-control" />
-                <span asp-validation-for="DepartureTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ESeats" class="control-label"></label>
-                <input asp-for="ESeats" class="form-control" value="20"/>
-                <span asp-validation-for="ESeats" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BSeats" class="control-label"></label>
-                <input asp-for="BSeats" class="form-control" value="8"/>
-                <span asp-validation-for="BSeats" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EPrice" class="control-label"></label>
-                <input asp-for="EPrice" class="form-control" />
-                <span asp-validation-for="EPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BPrice" class="control-label"></label>
-                <input asp-for="BPrice" class="form-control" />
-                <span asp-validation-for="BPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+        <div class="mt-4 text-center">
+            <a asp-action="Index" class="text-decoration-none text-muted">
+                <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 1.2rem;">arrow_back</span> Back to Schedule List
+            </a>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2-search').select2({
+                width: '100%',
+                allowClear: true
+            });
+        });
+    </script>
+}
 

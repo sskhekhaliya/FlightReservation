@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,6 +17,11 @@ namespace FlightReservation.Models
         public string Name { get; set; }
         
         public string Logo { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Upload Logo Image")]
+        public Microsoft.AspNetCore.Http.IFormFile LogoFile { get; set; }
+
         public ICollection<Schedule> Schedules { get; set; }
     }
 }

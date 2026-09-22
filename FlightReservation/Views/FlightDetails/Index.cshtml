@@ -1,47 +1,50 @@
-﻿@model IEnumerable<FlightReservation.Models.FlightDetail>
+@model IEnumerable<FlightReservation.Models.FlightDetail>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Flight Details";
 }
 
-<h1>Flight Details</h1>
+<div class="card shadow-sm border-0 mt-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+        <h4 class="mb-0 text-primary fw-bold"><span class="material-symbols-outlined align-middle">flight</span> Flight Details</h4>
+        <a asp-action="Create" class="btn btn-primary"><span class="material-symbols-outlined align-middle" style="font-size:18px;">add</span> Add New</a>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">@Html.DisplayNameFor(model => model.FlightID)</th>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.Logo)</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (var item in Model) {
+                    <tr>
+                        <td class="ps-4 align-middle">@Html.DisplayFor(modelItem => item.FlightID)</td>
+                        <td class="align-middle fw-bold">@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td class="align-middle">
+                            @if (!string.IsNullOrEmpty(item.Logo))
+                            {
+                                <img src="@item.Logo" alt="Logo" style="height: 30px; object-fit: contain;" onerror="this.style.display='none'" />
+                            }
+                            else
+                            {
+                                <span class="text-muted small">No logo</span>
+                            }
+                        </td>
+                        <td class="text-end pe-4 align-middle">
+                            <a asp-action="Edit" asp-route-id="@item.FlightID" class="btn btn-sm btn-outline-primary"><span class="material-symbols-outlined align-middle" style="font-size:16px;">edit</span></a>
+                            <a asp-action="Details" asp-route-id="@item.FlightID" class="btn btn-sm btn-outline-secondary"><span class="material-symbols-outlined align-middle" style="font-size:16px;">visibility</span></a>
+                            <a asp-action="Delete" asp-route-id="@item.FlightID" class="btn btn-sm btn-outline-danger"><span class="material-symbols-outlined align-middle" style="font-size:16px;">delete</span></a>
+                        </td>
+                    </tr>
+            }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Add New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FlightID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Logo)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FlightID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Logo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.FlightID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FlightID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FlightID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

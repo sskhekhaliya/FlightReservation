@@ -1,143 +1,64 @@
-﻿@model FlightReservation.Models.Booking
+@model FlightReservation.Models.Booking
 
-@{
-    ViewData["Title"] = "Details";
-}
+@{ ViewData["Title"] = "Booking Details"; }
 
-<h1>Details</h1>
+<div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0"><span class="material-symbols-outlined align-middle">book_online</span> Booking Details</h4>
+            </div>
+            <div class="card-body p-4">
+                <div class="row border-bottom pb-3 mb-3">
+                    <div class="col-md-6">
+                        <p class="text-muted mb-0">Booking ID</p>
+                        <h4 class="fw-bold">@Model.BookingID</h4>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="text-muted mb-0">Date & Time</p>
+                        <h5 class="fw-bold">@Model.DateAndTime</h5>
+                    </div>
+                </div>
+                
+                <div class="row mb-4 text-center">
+                    <div class="col">
+                        <h5 class="text-muted mb-1">Origin</h5>
+                        <h4 class="fw-bold text-primary">@(Model.Schedule.From?.Split('-').FirstOrDefault()?.Trim())</h4>
+                        <small>@Model.Schedule.BoardingTime</small>
+                    </div>
+                    <div class="col-2 d-flex align-items-center justify-content-center">
+                        <span class="material-symbols-outlined text-info" style="font-size: 2rem;">flight</span>
+                    </div>
+                    <div class="col">
+                        <h5 class="text-muted mb-1">Destination</h5>
+                        <h4 class="fw-bold text-success">@(Model.Schedule.To?.Split('-').FirstOrDefault()?.Trim())</h4>
+                        <small>@Model.Schedule.DepartureTime</small>
+                    </div>
+                </div>
 
-<div>
-    <h4>Booking Details</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BookingID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BookingID)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DateAndTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateAndTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserDetail)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserDetail.UserID)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Schedule)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Schedule.ScheduleID)
-        </dd>
-    </dl>
+                <div class="row bg-light p-3 rounded">
+                    <div class="col-md-4 text-center border-end">
+                        <p class="text-muted mb-0">Flight</p>
+                        <h5 class="fw-bold">@Model.Schedule.FlightDetail.FlightID</h5>
+                    </div>
+                    <div class="col-md-4 text-center border-end">
+                        <p class="text-muted mb-0">User ID</p>
+                        <h5 class="fw-bold">@Model.UserDetail.UserID</h5>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <p class="text-muted mb-0">Class</p>
+                        @if(Model.Class == "E") {
+                            <h5 class="fw-bold text-info">Economy</h5>
+                        } else {
+                            <h5 class="fw-bold text-warning">Business</h5>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-light text-center">
+                <a asp-action="Index" class="btn btn-outline-secondary"><span class="material-symbols-outlined align-middle" style="font-size:18px;">arrow_back</span> Back to Bookings</a>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <h4>Flight Details</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Schedule.FlightNo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Schedule.FlightNo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Schedule.FlightDetail.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Schedule.FlightDetail.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Class)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Class)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Schedule.From)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Schedule.From)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Schedule.To)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Schedule.To)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Schedule.BoardingTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Schedule.BoardingTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Schedule.DepartureTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Schedule.DepartureTime)
-        </dd>
-    </dl>
-</div>
-<div>
-    <h4>Flight Details</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserDetail.UserID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserDetail.UserID)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserDetail.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserDetail.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserDetail.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserDetail.EmailID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserDetail.EmailID)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserDetail.Gender)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserDetail.Gender)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserDetail.DOB)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserDetail.DOB)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserDetail.PhoneNo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserDetail.PhoneNo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserDetail.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserDetail.Address)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
