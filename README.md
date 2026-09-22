@@ -269,6 +269,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author & Acknowledgements
 
-- **Developer**: **[sskhekhaliya](https://www.sskhekhaliya.com)**
+- **Developer**: **[sskhekhaliya](https://www.sskhekhaliya.in/)**
 - **Project Initiative**: Assigned by **[Wipro Technologies Ltd.](https://www.wipro.com)**
 
